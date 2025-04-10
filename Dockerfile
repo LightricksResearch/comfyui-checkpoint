@@ -1,5 +1,4 @@
 # building contaienr for https://github.com/comfyanonymous/ComfyUI
-# FROM nvidia/cuda:12.6.2-devel-ubuntu24.04
 FROM docker.io/nvidia/cuda:12.6.2-base-ubuntu24.04
 WORKDIR /app
 
@@ -16,7 +15,7 @@ RUN apt install -y python3.9 \
 RUN git clone https://github.com/comfyanonymous/ComfyUI .
 
 COPY ./scripts ./scripts
-RUN ./scripts/download_models.sh
+# RUN ./scripts/download_models.sh
 
 #COPY --exclude=./models/*  . .
 
