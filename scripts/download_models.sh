@@ -1,22 +1,28 @@
 #! /bin/bash
-# download models from huggingface and save to models/
+# download models from huggingface and save to host machine /models
 
-VAE_URL=https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors
-VAE_FILENAME="/models/vae/${VAE_URL##*/}"
-mkdir -p /models/vae
+download_model() {
+    local url=$1
+	local dir=$2
+    local filename="/models/${dir}/${url##*/}"
+    
+    if [ ! -f "$filename" ]; then
+        echo "Downloading model $filename"
+		mkdir -p /models/${dir}
+        curl --location "$url" -o "$filename"
+    else
+        echo "Model $filename already exists"
+    fi
+}
 
-MODEL_URL=https://huggingface.co/sf3q5ws/duc/resolve/main/juggernautXL_juggXIByRundiffusion.safetensors
-MODEL_FILENAME="/models/checkpoints/${MODEL_URL##*/}"
-mkdir -p /models/checkpoints
+# VAE_URL=https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors
+# download_model $VAE_URL "vae"
+MEDIUM_MODEL_URL=https://huggingface.co/sf3q5ws/duc/resolve/main/juggernautXL_juggXIByRundiffusion.safetensors
+SMALL_MODEL_URL=https://huggingface.co/Comfy-Org/stable-diffusion-v1-5-archive/resolve/main/v1-5-pruned-emaonly-fp16.safetensors
+download_model $MEDIUM_MODEL_URL "checkpoints"
+download_model $SMALL_MODEL_URL "checkpoints"
 
-if [ ! -f "$MODEL_FILENAME" ]; then
-	echo "Downloading model $MODEL_FILENAME"
-	curl --location $MODEL_URL -o $MODEL_FILENAME
-fi
 
-if [ ! -f "$VAE_FILENAME" ]; then
-	echo "Downloading vae $VAE_FILENAME"
-	curl --location $VAE_URL -o $VAE_FILENAME
-fi
+/
 
 
