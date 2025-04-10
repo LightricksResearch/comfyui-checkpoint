@@ -1,0 +1,26 @@
+# Default values for comfyui-checkpoint
+replicaCount: 1
+namespace: $NAMESPACE
+
+image:
+  repository: gcr.io/$PROJECT_NAME/comfyui-checkpoint
+  tag: "0.0.3"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8188
+
+resources:
+  requests:
+    nvidia.com/gpu: "1"
+  limits:
+    nvidia.com/gpu: "1"
+
+nodeSelector:
+  nvidia.com/gpu: "present"
+
+tolerations:
+  - key: "nvidia.com/gpu"
+    operator: "Exists"
+    effect: "NoSchedule"
