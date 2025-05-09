@@ -1,5 +1,5 @@
 # building contaienr for https://github.com/comfyanonymous/ComfyUI
-FROM docker.io/nvidia/cuda:12.6.2-base-ubuntu24.04
+FROM docker.io/nvidia/cuda:12.6.3-base-ubuntu24.04
 WORKDIR /app
 
 # install curl and git

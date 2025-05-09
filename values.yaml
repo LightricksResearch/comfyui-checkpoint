@@ -4,7 +4,7 @@ namespace: $NAMESPACE
 
 image:
   repository: gcr.io/$PROJECT_NAME/comfyui-checkpoint
-  tag: "0.0.3"
+  tag: "0.0.4"
   pullPolicy: IfNotPresent
 
 service:
