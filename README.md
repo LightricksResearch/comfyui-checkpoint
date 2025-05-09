@@ -59,7 +59,7 @@ sudo chown $USER /models
 ./scripts/download_models.sh
 
 # start container (inference time will be printed on console)
-podman run --security-opt=label=disable --gpus=all -p 8188:8188 -v /models:/app/models -v /tmp/output:/app/output  --name=comfyui  gcr.io/$PROJECT_NAME/comfyui-checkpoint:0.0.3
+podman run --security-opt=label=disable --gpus=all -p 8188:8188 -v /models:/app/models -v /tmp/output:/app/output  --name=comfyui  gcr.io/$PROJECT_NAME/comfyui-checkpoint:0.0.4
 
 # execute inference
  ./scripts/generate_image.sh
@@ -76,9 +76,9 @@ building the image - you shuold provide your own `PROJECT_NAME`
 ```bash
 export PROJECT_NAME=<your-project-name>
 
-podman build . -t gcr.io/$PROJECT_NAME/comfyui-checkpoint:0.0.3
+podman build . -t gcr.io/$PROJECT_NAME/comfyui-checkpoint:0.0.4
 
-podman push gcr.io/$PROJECT_NAME/comfyui-checkpoint:0.0.3
+podman push gcr.io/$PROJECT_NAME/comfyui-checkpoint:0.0.4
 ```
 
 
